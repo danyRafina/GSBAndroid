@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GSB</string>
+    <string name="start_message">Application GSB</string>
+    <string name="start_connection">Veuillez-vous identifier</string>
+    <string name="id">Matricule</string>
+    <string name="passwd">Mot de passe</string>
+    <string name="validate">Valider</string>
+    <string name="reset">Annuler</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="search">Search</string>
+    <string name="products">Products</string>
+    <string name="contactus">Contact Us</string>
+    <string name="about">About</string>
+     
+      <string name="menu_about">A propos</string>
+      <string name="menu_cr_list">Vos comptes-rendus</string>
+       <string name="menu_add_cr">Saisir un compte-rendu</string>
+        <string name="menu_refresh">Rafraichir</string>
+        <string name="message_list_cr">Veuillez saisir le mois et lannee de rédaction du compte-rendu</string>
+
+</resources>

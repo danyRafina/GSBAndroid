@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        android:orderInCategory="100"
+        android:title="@string/search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_search"
+        />
+     <item
+        android:id="@+id/products"
+        android:orderInCategory="100"
+        android:title="@string/products"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/contact_us"
+        android:orderInCategory="100"
+        android:title="@string/contactus"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="100"
+        android:title="@string/about"
+        app:showAsAction="never"/>
+ 
+</menu>
