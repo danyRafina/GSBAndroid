@@ -3,7 +3,7 @@
     package="fr.gsbcr.android"
     android:versionCode="1"
     android:versionName="1.0" >
-
+<uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="21" />
@@ -12,8 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:logo="@drawable/logo"
-        android:theme="@style/android:Theme.Holo.Light" >
+        android:theme="@style/AppTheme.Base" >
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" >
@@ -24,10 +23,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fr.gsb.android.CompteRenduActivity"
+            android:name=".CompteRenduActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.CompteRendu" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name=".AboutActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.About" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

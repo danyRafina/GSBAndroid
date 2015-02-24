@@ -1,26 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/quit"
+          android:icon="@drawable/logout"
+          android:title="@string/logout"
+          android:showAsAction="ifRoom" />
     <item
-        android:id="@+id/search"
+        android:id="@+id/list_cr"
         android:orderInCategory="100"
-        android:title="@string/search"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_search"
+        android:title="@string/menu_cr_list"/>
+    <item
+        android:id="@+id/add_cr"
+        android:orderInCategory="100"
+        android:title="@string/menu_add_cr"
         />
-     <item
-        android:id="@+id/products"
-        android:orderInCategory="100"
-        android:title="@string/products"
-        app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/contact_us"
+        android:id="@+id/logout"
         android:orderInCategory="100"
-        android:title="@string/contactus"
-        app:showAsAction="never"/>
+        android:title="@string/logout"
+        />
     <item
         android:id="@+id/about"
         android:orderInCategory="100"
-        android:title="@string/about"
-        app:showAsAction="never"/>
- 
+        android:title="@string/menu_about"
+       />
+
 </menu>

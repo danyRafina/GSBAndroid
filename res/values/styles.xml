@@ -5,12 +5,8 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <!-- Application theme. -->
-   <style name="AppTheme.Base" parent="android:Theme.Holo.Light">
-      
- 		
+    <style name="AppTheme.Base" parent="android:Theme.Holo.Light">
+        <item name="android:icon">@android:color/transparent</item>
     </style>
-    
-   
 
 </resources>
- 
