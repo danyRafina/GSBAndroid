@@ -117,7 +117,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 			context = getApplicationContext();
 			Toast.makeText(context, text, duration).show();
 		} else {
-			String post = "http://192.168.1.1:8080/connection/"
+			String post = "http://192.168.3.1:8080/connection/"
 					+ etId.getText().toString() + "/"
 					+ etPassword.getText().toString();
 				task = new RequestTask();
@@ -130,8 +130,10 @@ public class LoginActivity extends Activity implements AsyncInterface {
 		context = getApplicationContext();
 		JSONObject json = new JSONObject(output);
 		if (json.getString("RESULT").equals("ACCEPT")) {
+			Collaborateur visiteur = new Collaborateur(json.getString("MATRICULE"),json.getString("NOM"),json.getString("PRENOM"),json.getString("MDP"));
+			Modele.setVisiteur(visiteur);
 			startActivity(new Intent(LoginActivity.this,
-					CompteRenduActivity.class));
+					DashboardActivity.class));
 		} else {
 				this.task = null;
 				text = "Votre identifiant ou mot de passe est incorrect";

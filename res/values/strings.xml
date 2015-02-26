@@ -9,12 +9,16 @@
     <string name="validate">Valider</string>
     <string name="reset">Annuler</string>
     <string name="logout">Déconnexion</string>
-      <string name="copyr">&#169; 2015 GSB</string>
-       <string name="dedicate">Application destinée aux Visiteurs </string>
-      <string name="menu_about">A propos</string>
-      <string name="menu_cr_list">Vos comptes-rendus</string>
-       <string name="menu_add_cr">Saisir un compte-rendu</string>
-        <string name="menu_refresh">Rafraichir</string>
-        <string name="message_list_cr">Veuillez saisir le mois et lannee de rédaction du compte-rendu</string>
+    <string name="copyr">&#169; 2015 GSB</string>
+    <string name="dedicate">Application destinée aux Visiteurs </string>
+    <string name="menu_about">A propos</string>
+    <string name="menu_cr_list">Vos comptes-rendus</string>
+    <string name="menu_add_cr">Saisir un compte-rendu</string>
+    <string name="menu_refresh">Rafraichir</string>
+    <string name="message_list_cr">Veuillez saisir le mois et lannee de rédaction du compte-rendu</string>
+    <string name="fullName">//</string>
+    <string name="aboutApp">Sur cette application vous pouvez  :</string>
+    <string name="showCR"> > Consulter vos compte-rendus</string>
+    <string name="addCR"> > saisir un compte-rendu</string>
 
 </resources>
