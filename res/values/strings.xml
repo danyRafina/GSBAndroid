@@ -15,10 +15,20 @@
     <string name="menu_cr_list">Vos comptes-rendus</string>
     <string name="menu_add_cr">Saisir un compte-rendu</string>
     <string name="menu_refresh">Rafraichir</string>
-    <string name="message_list_cr">Veuillez saisir le mois et lannee de rédaction du compte-rendu</string>
     <string name="fullName">//</string>
     <string name="aboutApp">Sur cette application vous pouvez  :</string>
-    <string name="showCR"> > Consulter vos compte-rendus</string>
+    <string name="showCR"> > consulter vos compte-rendus</string>
     <string name="addCR"> > saisir un compte-rendu</string>
-
+    <string name="messageNewCR1">Veuillez compléter</string>
+    <string name="messageNewCR2">tous les champs ci-dessous</string>
+    <string name="dateVisite"> Date de visite</string>
+    <string name="praticienList"> Choisissez le praticien</string>
+    <string name="motifList">Selectionnez le motif</string>
+    <string name="changeDate">Changer</string>
+    <string name="date">[date]</string>
+    <string name="coefconf">Coefficiant de confiance (De 1 à 5 )</string>
+	 <string name="bilan">Saisissez le bilan </string>
+	 <string name="labelDate">Date de visite :</string>
+	 <string name="labelPra">Nom du praticien :</string>
+    
 </resources>

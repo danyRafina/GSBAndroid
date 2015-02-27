@@ -1,15 +1,7 @@
 package fr.gsbcr.android;
 
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,9 +11,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -73,12 +63,14 @@ public class LoginActivity extends Activity implements AsyncInterface {
 		    .setTitle("Quitter l'application")
 		    .setMessage("Voulez-vous vraiment quitter cette application ?")
 		    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
+		        @Override
+				public void onClick(DialogInterface dialog, int which) { 
 		            // do nothing
 		        }
 		     })
 		     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
+		        @Override
+				public void onClick(DialogInterface dialog, int which) { 
 		        	  finish();
 		              System.exit(0);
 		        }
@@ -126,6 +118,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 			}
 	}
 
+	@Override
 	public void processFinish(String output) throws JSONException {
 		context = getApplicationContext();
 		JSONObject json = new JSONObject(output);

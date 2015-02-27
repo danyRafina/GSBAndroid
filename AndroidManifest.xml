@@ -26,18 +26,36 @@
             android:name=".DashboardActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.Dashboard" />
+                <action android:name="android.intent.action.dashboard" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
          <activity
             android:name=".AboutActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.About" />
+                <action android:name="android.intent.action.about" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NouvCompteRenduActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.new_compte_rendu" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+         <activity
+            android:name=".CompteRenduListeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.compte_rendu_liste" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
