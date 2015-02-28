@@ -34,6 +34,9 @@ public class LoginActivity extends Activity implements AsyncInterface {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		if (getIntent().getBooleanExtra("EXIT", false)) {
+		    finish();  
+		}
 		task.delegation = this;
 		etId = (EditText) findViewById(fr.gsbcr.android.R.id.etId);
 		etPassword = (EditText) findViewById(fr.gsbcr.android.R.id.etPassword);

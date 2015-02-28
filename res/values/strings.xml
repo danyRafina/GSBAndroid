@@ -21,14 +21,24 @@
     <string name="addCR"> > saisir un compte-rendu</string>
     <string name="messageNewCR1">Veuillez compléter</string>
     <string name="messageNewCR2">tous les champs ci-dessous</string>
-    <string name="dateVisite"> Date de visite</string>
-    <string name="praticienList"> Choisissez le praticien</string>
-    <string name="motifList">Selectionnez le motif</string>
+    <string name="praticienList"> Choisissez le praticien :</string>
+    <string name="motifList">Selectionnez le motif :</string>
     <string name="changeDate">Changer</string>
     <string name="date">[date]</string>
-    <string name="coefconf">Coefficiant de confiance (De 1 à 5 )</string>
-	 <string name="bilan">Saisissez le bilan </string>
-	 <string name="labelDate">Date de visite :</string>
-	 <string name="labelPra">Nom du praticien :</string>
+    <string name="coefconf">Coefficiant de confiance : </string>
+    <string name="bilan">Saisissez le bilan </string>
+    <string name="labelDate">Date de visite :</string>
+    <string name="labelPra">Nom du praticien :</string>
+    <string name="detailTilteCR">Détails du compte-rendu</string>
+    <string name="numCR">Numéro : </string>
+    <string name="dateRedac">Date de rédaction :</string>
+    <string name="pra">Praticien : </string>
+    <string name="coefConf">Coefficiant de confiance : </string>
+    <string name="bilanCR">Bilan : </string>
+    <string name="motif">Motif :</string>
+    <string name="rapLu">Lecture :</string>
+     <string name="cancel">Annuler</string>
+      <string name="next">Suivant</string>
     
+
 </resources>

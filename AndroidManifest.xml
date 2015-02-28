@@ -22,6 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+         <activity
+            android:name=".AboutActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.about" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DashboardActivity"
             android:label="@string/app_name" >
@@ -31,11 +40,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-         <activity
-            android:name=".AboutActivity"
+        <activity
+            android:name=".CompteRenduDetailsActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.about" />
+                <action android:name="android.intent.action.compte_rendu" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -51,7 +60,9 @@
         </activity>
          <activity
             android:name=".CompteRenduListeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:launchMode="singleInstance">
+            
             <intent-filter>
                 <action android:name="android.intent.action.compte_rendu_liste" />
 
