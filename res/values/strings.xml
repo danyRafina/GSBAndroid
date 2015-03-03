@@ -37,8 +37,8 @@
     <string name="bilanCR">Bilan : </string>
     <string name="motif">Motif :</string>
     <string name="rapLu">Lecture :</string>
-     <string name="cancel">Annuler</string>
-      <string name="next">Suivant</string>
-    
+    <string name="cancel">Annuler</string>
+    <string name="next">Suivant</string>
+    <string name="Med">Choisissez les produits :</string>
 
 </resources>
