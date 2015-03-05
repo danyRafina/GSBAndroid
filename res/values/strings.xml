@@ -39,6 +39,7 @@
     <string name="rapLu">Lecture :</string>
     <string name="cancel">Annuler</string>
     <string name="next">Suivant</string>
-    <string name="Med">Choisissez les produits :</string>
-
+    <string name="Med">Selectionnez les produits :</string>
+    <string name="clearList">Vider la liste</string>
+    <string  name="prod">Choississez le nombre d\'échantillon \n offert pour chaque produit</string>
 </resources>

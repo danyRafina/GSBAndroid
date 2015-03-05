@@ -74,8 +74,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 		     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
 		        @Override
 				public void onClick(DialogInterface dialog, int which) { 
-		        	  finish();
-		              System.exit(0);
+		        	finish();
 		        }
 		     })
 		    .setIcon(android.R.drawable.ic_dialog_alert)
@@ -124,19 +123,29 @@ public class LoginActivity extends Activity implements AsyncInterface {
 	@Override
 	public void processFinish(String output) throws JSONException {
 		context = getApplicationContext();
-		JSONObject json = new JSONObject(output);
-		if (json.getString("RESULT").equals("ACCEPT")) {
-			Collaborateur visiteur = new Collaborateur(json.getString("MATRICULE"),json.getString("NOM"),json.getString("PRENOM"),json.getString("MDP"));
-			Modele.setVisiteur(visiteur);
-			startActivity(new Intent(LoginActivity.this,
-					DashboardActivity.class));
-		} else {
-				this.task = null;
-				text = "Votre identifiant ou mot de passe est incorrect";
-				Toast.makeText(context, text, duration).show();
-
-			
-
+		if(output != null){
+			JSONObject json = new JSONObject(output);
+			if (json.getString("RESULT").equals("ACCEPT")) {
+				Collaborateur visiteur = new Collaborateur(json.getString("MATRICULE"),json.getString("NOM"),json.getString("PRENOM"),json.getString("MDP"));
+				Modele.setVisiteur(visiteur);
+				startActivity(new Intent(LoginActivity.this,
+						DashboardActivity.class));
+			} else {
+					this.task = null;
+					etId.setText("");
+					etPassword.setText("");
+					text = "Votre identifiant ou mot de passe est incorrect";
+					Toast.makeText(context, text, duration).show();
+	
+				
+	
+			}
+		}
+		else {
+			etId.setText("");
+			etPassword.setText("");
+			text = "Vérifiez votre connexion internet !";
+			Toast.makeText(context, text, duration).show();
 		}
 	}
 
