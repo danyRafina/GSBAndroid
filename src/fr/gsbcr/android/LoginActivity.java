@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -74,6 +75,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 		     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
 		        @Override
 				public void onClick(DialogInterface dialog, int which) { 
+		        	//CompteRenduListeActivity.this.finish();
 		        	finish();
 		        }
 		     })
@@ -111,13 +113,23 @@ public class LoginActivity extends Activity implements AsyncInterface {
 			context = getApplicationContext();
 			Toast.makeText(context, text, duration).show();
 		} else {
-			String post = "http://192.168.3.1:8080/connection/"
+			String post = "http://192.168.1.200:8080/connection/"
 					+ etId.getText().toString() + "/"
 					+ etPassword.getText().toString();
 				task = new RequestTask();
 				task.delegation = this;
 				this.task.execute(post);
 			}
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			//DO NOTHING
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
@@ -147,6 +159,11 @@ public class LoginActivity extends Activity implements AsyncInterface {
 			text = "Vérifiez votre connexion internet !";
 			Toast.makeText(context, text, duration).show();
 		}
+	}
+
+	public void preProcess() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
