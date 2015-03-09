@@ -194,7 +194,7 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 							int which) {
 						sendTask = new SendTask();
 						sendTask.delegation = EchantillonsActivity.this;
-						String url = "http://192.168.1.200:8080/insertCR/"+Modele.getVisiteur().getsColMatricule()+"/"+Modele.getVisiteur().getsColMdp();
+						String url = "http://"+Modele.getAddressAndPort()+"/insertCR/"+Modele.getVisiteur().getsColMatricule()+"/"+Modele.getVisiteur().getsColMdp();
 						JSONObject json = new JSONObject();
 						JSONArray jsonA = new JSONArray();
 						JSONObject json3 = new JSONObject();

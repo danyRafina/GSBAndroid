@@ -72,7 +72,7 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 		}
 		task = new RequestTask();
 		task.delegation = this;
-		String post = "http://192.168.1.200:8080/listsForCR/"
+		String post = "http://"+Modele.getAddressAndPort()+"/listsForCR/"
 				+ Modele.getVisiteur().getsColMatricule() + "/"
 				+ Modele.getVisiteur().getsColMdp();
 		this.preProcess();

@@ -13,6 +13,21 @@ public class Modele  {
 	private static CompteRendu cr;
 	private static List<CompteRendu> lesCR = null;
 	private static List<Medicament> medicaments = null;
+	private static String addressAndPort = null;
+
+	/**
+	 * @return the addressAndPort
+	 */
+	public static String getAddressAndPort() {
+		return addressAndPort;
+	}
+
+	/**
+	 * @param addressAndPort the addressAndPort to set
+	 */
+	public static void setAddressAndPort(String addressAndPort) {
+		Modele.addressAndPort = addressAndPort;
+	}
 
 	/**
 	 * @return the lesCR

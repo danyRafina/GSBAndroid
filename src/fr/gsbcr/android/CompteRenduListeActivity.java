@@ -57,7 +57,7 @@ AsyncInterface {
 		Bundle bundle = getIntent().getExtras();
 		System.out.println(bundle.getInt("Year"));
 		System.out.println(bundle.getInt("Month"));
-		String post = "http://192.168.1.200:8080/listCR/" + bundle.getInt("Year")
+		String post = "http://"+Modele.getAddressAndPort()+"/listCR/" + bundle.getInt("Year")
 				+ "/" + (bundle.getInt("Month") + 1) + "/"
 				+ Modele.getVisiteur().getsColMatricule() + "/"
 				+ Modele.getVisiteur().getsColMdp();

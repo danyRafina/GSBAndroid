@@ -52,7 +52,7 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 		selectMedButton.setText("Aucun produit sélectionné");
 
 		selectMedButton.setOnClickListener(this);
-		String post = "http://192.168.1.200:8080/listMedicament/"
+		String post = "http://"+Modele.getAddressAndPort()+"/listMedicament/"
 				+ Modele.getVisiteur().getsColMatricule() + "/"
 				+ Modele.getVisiteur().getsColMdp();
 		task.execute(post);
