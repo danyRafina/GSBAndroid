@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +31,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 	int duration = Toast.LENGTH_SHORT;
 	Toolbar mToolbar;
 	RequestTask task = new RequestTask();
+	private ProgressDialog prog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +120,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 					+ etPassword.getText().toString();
 				task = new RequestTask();
 				task.delegation = this;
+				this.preProcess();
 				this.task.execute(post);
 			}
 	}
@@ -134,6 +137,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 
 	@Override
 	public void processFinish(String output) throws JSONException {
+		prog.dismiss();
 		context = getApplicationContext();
 		if(output != null){
 			JSONObject json = new JSONObject(output);
@@ -154,16 +158,19 @@ public class LoginActivity extends Activity implements AsyncInterface {
 			}
 		}
 		else {
-			etId.setText("");
-			etPassword.setText("");
 			text = "Vérifiez votre connexion internet !";
 			Toast.makeText(context, text, duration).show();
 		}
 	}
 
 	public void preProcess() {
-		// TODO Auto-generated method stub
+		prog = new ProgressDialog(LoginActivity.this);
+		prog.setTitle("Connexion en cours . Veuillez patienter !");
+		prog.setCancelable(false);
+		prog.show();
 		
 	}
+
+
 
 }
