@@ -30,7 +30,7 @@ public class NewAdapter extends ArrayAdapter<CompteRendu> {
 		TextView nom = (TextView) rowView.findViewById(R.id.nom);
 		TextView date = (TextView) rowView.findViewById(R.id.date);
 		nom.setText(cr.get(position).getPraticien().getPraNom());
-		SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyy");
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		String date1 = df.format(cr.get(position).getdDateVisite());
 		date.setText(date1);
 		return rowView;

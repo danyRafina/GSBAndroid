@@ -199,7 +199,7 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 						JSONArray jsonA = new JSONArray();
 						JSONObject json3 = new JSONObject();
 						try {
-							String DATE_FORMAT_NOW = "yyyy-MM-dd";
+							String DATE_FORMAT_NOW = "yyyy-MM-d";
 
 							SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 							String stringDate = sdf.format(Modele.getCr().getdDateVisite());
@@ -210,7 +210,7 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 							json.put("motif", Modele.getCr().getsMotifCR().getNumMotif());
 							json.put("dateVisite",stringDate);
 							json.put("rapLu",Modele.getCr().getByEstLuCR());
-
+							Log.d("JSON CR",json.toString());
 
 
 							for(Offrir oneOff : off){
