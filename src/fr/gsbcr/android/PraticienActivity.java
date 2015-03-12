@@ -21,38 +21,35 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 @SuppressLint("SimpleDateFormat")
-public class CompteRenduDetailsActivity extends Activity {
-	TextView tvPraFullName , tvBilan , tvMotif , tvDateVisite , tvRapDate , tvRapNum , tvRapLu , tvCoefConf;
+public class PraticienActivity extends Activity {
+	TextView idPra , nom , prenom , adresse , cp ,ville , coefN, prof , lieu ; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.compte_rendu_details);
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		CompteRendu cr =  Modele.getCr();
-		Modele.setPraticien(cr.getPraticien());
-		tvPraFullName = (TextView)findViewById(fr.gsbcr.android.R.id.tvPra);
-		tvBilan = (TextView)findViewById(fr.gsbcr.android.R.id.proPra);
-		tvMotif = (TextView)findViewById(fr.gsbcr.android.R.id.coefN);
-		tvDateVisite= (TextView)findViewById(fr.gsbcr.android.R.id.prenomPra);
-		tvRapDate = (TextView)findViewById(fr.gsbcr.android.R.id.nomPra);
-		tvRapNum = (TextView)findViewById(fr.gsbcr.android.R.id.tvNumCR);
-		tvRapLu = (TextView)findViewById(fr.gsbcr.android.R.id.villePra);
-		tvCoefConf = (TextView)findViewById(fr.gsbcr.android.R.id.cpPra);
-		tvPraFullName.setText(cr.getPraticien().getPraNom()+" "+cr.getPraticien().getPraPrenom());
-		tvBilan.setText(cr.getsBilanCR());
-		tvMotif.setText(cr.getsMotifCR().getLabelMotif());
-		SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyy");
-		tvDateVisite.setText(df.format(cr.getdDateVisite()));
-		tvRapDate.setText(df.format(cr.getdDateCR()));
-		tvRapNum.setText(Integer.toString(cr.getiNumCR()));
-		if(cr.getByEstLuCR().equals("1")){
-			tvRapLu.setText("Oui");
-		}
-		else {
-			tvRapLu.setText("Non");
-		}
-		tvCoefConf.setText(Integer.toString(cr.getiCoefConfCR()));
+		Praticien pra = Modele.getPraticien();
+		System.out.println(pra);
+		idPra = (TextView)findViewById(fr.gsbcr.android.R.id.numPra);
+		nom = (TextView)findViewById(fr.gsbcr.android.R.id.nomPra);
+		prenom = (TextView)findViewById(fr.gsbcr.android.R.id.prenomPra);
+		adresse = (TextView)findViewById(fr.gsbcr.android.R.id.addPra);
+		cp = (TextView)findViewById(fr.gsbcr.android.R.id.cpPra);
+		ville = (TextView)findViewById(fr.gsbcr.android.R.id.villePra);
+		coefN = (TextView)findViewById(fr.gsbcr.android.R.id.coefN);
+		prof = (TextView)findViewById(fr.gsbcr.android.R.id.proPra);
+		lieu = (TextView)findViewById(fr.gsbcr.android.R.id.local);
+		idPra.setText(pra.getPraNum());
+		nom.setText(pra.getPraNom());
+		prenom.setText(pra.getPraPrenom());
+		adresse.setText(pra.getPraAdresse());
+		cp.setText(pra.getPraCP());
+		ville.setText(pra.getPraVille());
+		coefN.setText(""+pra.getPraCoefN());
+		prof.setText(pra.getPraProfession());
+		lieu.setText(pra.getPraLieuTravail());
+		
 
 	}
 
@@ -68,10 +65,10 @@ public class CompteRenduDetailsActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch(item.getItemId()){
 		case R.id.add_cr :
-			startActivity(new Intent(CompteRenduDetailsActivity.this,NouvCompteRenduActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+			startActivity(new Intent(PraticienActivity.this,NouvCompteRenduActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 			break;
 		case R.id.logout :
-			Builder al = new AlertDialog.Builder(CompteRenduDetailsActivity.this);
+			Builder al = new AlertDialog.Builder(PraticienActivity.this);
 			al.setTitle("Déconnexion")
 			.setMessage(
 					"Voulez-vous vraiment vous déconnecter ?")
@@ -111,7 +108,7 @@ public class CompteRenduDetailsActivity extends Activity {
 			this.finish();
 		break;
 		case R.id.tableME :
-			startActivity(new Intent(CompteRenduDetailsActivity.this,
+			startActivity(new Intent(PraticienActivity.this,
 					AboutActivity.class));
 			break;
 		case R.id.quit :
@@ -157,7 +154,7 @@ public class CompteRenduDetailsActivity extends Activity {
 				public void onDateSet(DatePicker view, int year,
 						int monthOfYear, int dayOfMonth) {	
 				
-						Intent intent = new Intent(CompteRenduDetailsActivity.this,CompteRenduListeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+						Intent intent = new Intent(PraticienActivity.this,CompteRenduListeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 						intent.putExtra("Year",(int)year);
 						intent.putExtra("Month",monthOfYear);
 						startActivity(intent);
@@ -210,11 +207,6 @@ public class CompteRenduDetailsActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	};
-	
-	public void getDetailsPra(View view){
-		Intent intent = new Intent(CompteRenduDetailsActivity.this,PraticienActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		startActivity(intent);
-	}
 
 
 	

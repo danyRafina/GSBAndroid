@@ -41,7 +41,7 @@ public class LoginActivity extends Activity implements AsyncInterface {
 		    finish();  
 		}
 		task.delegation = this;
-		Modele.setAddressAndPort("192.168.1.200:873");
+		Modele.setAddressAndPort("192.168.43.48:8080");
 		etId = (EditText) findViewById(fr.gsbcr.android.R.id.etId);
 		etPassword = (EditText) findViewById(fr.gsbcr.android.R.id.etPassword);
 		etId.setText("");

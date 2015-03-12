@@ -74,7 +74,7 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 			row.setGravity(Gravity.CENTER);
 			np = new NumberPicker(EchantillonsActivity.this);
 			np.setId(i);
-			np.setMaxValue(20);
+			np.setMaxValue(10);
 			np.setMinValue(1);
 			TextView v = new TextView(this);
 			v.setTextSize(20);

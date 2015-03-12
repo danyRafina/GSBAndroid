@@ -14,6 +14,7 @@ public class Modele  {
 	private static List<CompteRendu> lesCR = null;
 	private static List<Medicament> medicaments = null;
 	private static String addressAndPort = null;
+	private static Praticien praticien = null;
 
 	/**
 	 * @return the addressAndPort
@@ -56,6 +57,21 @@ public class Modele  {
 	public static void setCr(CompteRendu cr) {
 		Modele.cr = cr;
 	}
+	
+
+	/**
+	 * @return the praticien
+	 */
+	public static Praticien getPraticien() {
+		return praticien;
+	}
+
+	/**
+	 * @param praticien the praticien to set
+	 */
+	public static void setPraticien(Praticien praticien) {
+		Modele.praticien = praticien;
+	}
 
 	/**
 	 * @param visiteur the visiteur to set
@@ -90,6 +106,7 @@ public class Modele  {
 		Modele.setLesCR(null);
 		Modele.setMedicaments(null);
 		Modele.setCr(null);
+		Modele.setPraticien(null);
 	}
 	
 }

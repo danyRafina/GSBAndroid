@@ -52,7 +52,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/tvDateVisite"
+            android:layout_below="@+id/prenomPra"
             android:layout_marginRight="15dp"
             android:onClick="changeDate"
             android:text="@string/changeDate" />
@@ -63,13 +63,13 @@
             android:layout_height="20dp"
             android:layout_alignBaseline="@+id/changeDate"
             android:layout_alignBottom="@+id/changeDate"
-            android:layout_alignLeft="@+id/tvDateVisite"
+            android:layout_alignLeft="@+id/prenomPra"
             android:layout_marginLeft="14dp"
             android:text="@string/date"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvDateVisite"
+            android:id="@+id/prenomPra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

@@ -274,7 +274,7 @@ AsyncInterface {
 				Praticien praticien = new Praticien(Integer.parseInt(row
 						.getString("PRA_NUM").toString()), row.getString(
 								"PRA_NOM").toString(), row.getString("PRA_PRENOM")
-								.toString());
+								.toString(),row.getString("PRA_ADRESSE"),row.getInt("PRA_CP"),row.getString("PRA_VILLE"),Float.parseFloat(row.getString("PRA_COEFN")),row.getString("PRA_PROF"),row.getString("PRA_LIEU"));
 				try {
 					lesCR.add(new CompteRendu(Modele.getVisiteur(), Integer
 							.parseInt(row.getString("NUM").toString()),

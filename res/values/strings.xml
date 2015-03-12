@@ -16,7 +16,8 @@
     <string name="menu_add_cr">Saisir un compte-rendu</string>
     <string name="menu_refresh">Rafraichir</string>
     <string name="fullName">//</string>
-    <string name="aboutApp">Sur cette application vous pouvez  :</string>
+    <string name="aboutApp">Sur cette application</string>
+    <string name="aboutApp2">vous pouvez  :</string>
     <string name="showCR"> > consulter vos compte-rendus</string>
     <string name="addCR"> > saisir un compte-rendu</string>
     <string name="messageNewCR1">Veuillez compléter</string>
@@ -38,8 +39,18 @@
     <string name="motif">Motif :</string>
     <string name="rapLu">Lecture :</string>
     <string name="cancel">Annuler</string>
+    <string name="nom" >Nom :</string>
+    <string name="prenom">Prénom :</string>
+    <string name="praD">Détails du praticiens </string>
+    <string name="adresse">Adresse : </string>
+    <string name="cp">Code postal :</string>
+    <string name="ville">Ville :</string>
+    <string name="prefession">Profession :</string>
+    <string name="lieu_de_travail">Lieu de travail :</string>
+    <string name="coefN">Coefficient de notoriété : </string>
     <string name="next">Suivant</string>
     <string name="Med">Selectionnez les produits :</string>
     <string name="clearList">Vider la liste</string>
+    <string name="see">Voir les infos relatives au praticien</string>
     <string  name="prod">Choississez le nombre d\'échantillon \n offert pour chaque produit</string>
 </resources>

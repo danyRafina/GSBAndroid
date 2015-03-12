@@ -429,7 +429,7 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 				JSONObject row = jsonPraticiens.getJSONObject(i);
 				Praticien praticien = new Praticien(Integer.parseInt(row.getString(
 						"NUM").toString()), row.getString("NOM").toString(), row
-						.getString("PRENOM").toString());
+						.getString("PRENOM").toString(),null,0,null,0,null,null);
 				praticiens.add(praticien);
 			}
 			for (int i = 0; i < jsonMotifs.length(); i++) {
