@@ -26,25 +26,24 @@ public class PraticienActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.compte_rendu_details);
+		setContentView(R.layout.praticien_details);
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		Praticien pra = Modele.getPraticien();
-		System.out.println(pra);
 		idPra = (TextView)findViewById(fr.gsbcr.android.R.id.numPra);
 		nom = (TextView)findViewById(fr.gsbcr.android.R.id.nomPra);
 		prenom = (TextView)findViewById(fr.gsbcr.android.R.id.prenomPra);
 		adresse = (TextView)findViewById(fr.gsbcr.android.R.id.addPra);
-		cp = (TextView)findViewById(fr.gsbcr.android.R.id.cpPra);
+		cp = (TextView)findViewById(fr.gsbcr.android.R.id.cp);
 		ville = (TextView)findViewById(fr.gsbcr.android.R.id.villePra);
 		coefN = (TextView)findViewById(fr.gsbcr.android.R.id.coefN);
 		prof = (TextView)findViewById(fr.gsbcr.android.R.id.proPra);
 		lieu = (TextView)findViewById(fr.gsbcr.android.R.id.local);
-		idPra.setText(pra.getPraNum());
+		idPra.setText(""+pra.getPraNum());
 		nom.setText(pra.getPraNom());
 		prenom.setText(pra.getPraPrenom());
 		adresse.setText(pra.getPraAdresse());
-		cp.setText(pra.getPraCP());
+		cp.setText(""+pra.getPraCP());
 		ville.setText(pra.getPraVille());
 		coefN.setText(""+pra.getPraCoefN());
 		prof.setText(pra.getPraProfession());

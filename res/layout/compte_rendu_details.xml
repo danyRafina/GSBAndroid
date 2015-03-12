@@ -144,17 +144,10 @@
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge1"
+            <Button
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo" />
-
-            <CheckedTextView
-                android:id="@+id/chPraD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
                 android:text="@string/see"
                 android:onClick="getDetailsPra" />
 
@@ -178,7 +171,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/cpPra"
+                android:id="@+id/cp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"

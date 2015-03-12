@@ -4,8 +4,8 @@
     <string name="app_name">GSB</string>
     <string name="start_message">Application GSB</string>
     <string name="start_connection">Veuillez-vous identifier</string>
-    <string name="id">Matricule</string>
-    <string name="passwd">Mot de passe</string>
+    <string name="id">Votre matricule</string>
+    <string name="passwd">Votre mot de passe</string>
     <string name="validate">Valider</string>
     <string name="reset">Annuler</string>
     <string name="logout">Déconnexion</string>
@@ -16,8 +16,7 @@
     <string name="menu_add_cr">Saisir un compte-rendu</string>
     <string name="menu_refresh">Rafraichir</string>
     <string name="fullName">//</string>
-    <string name="aboutApp">Sur cette application</string>
-    <string name="aboutApp2">vous pouvez  :</string>
+    <string name="aboutApp">Ici , vous pouvez  :</string>
     <string name="showCR"> > consulter vos compte-rendus</string>
     <string name="addCR"> > saisir un compte-rendu</string>
     <string name="messageNewCR1">Veuillez compléter</string>
@@ -41,7 +40,8 @@
     <string name="cancel">Annuler</string>
     <string name="nom" >Nom :</string>
     <string name="prenom">Prénom :</string>
-    <string name="praD">Détails du praticiens </string>
+    <string name="praD">Informations sur le praticien </string>
+    <string name="praDetails"> > Voir les infos sur un praticien</string>
     <string name="adresse">Adresse : </string>
     <string name="cp">Code postal :</string>
     <string name="ville">Ville :</string>

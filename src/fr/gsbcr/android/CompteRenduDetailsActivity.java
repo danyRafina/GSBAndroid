@@ -38,11 +38,11 @@ public class CompteRenduDetailsActivity extends Activity {
 		tvRapDate = (TextView)findViewById(fr.gsbcr.android.R.id.nomPra);
 		tvRapNum = (TextView)findViewById(fr.gsbcr.android.R.id.tvNumCR);
 		tvRapLu = (TextView)findViewById(fr.gsbcr.android.R.id.villePra);
-		tvCoefConf = (TextView)findViewById(fr.gsbcr.android.R.id.cpPra);
+		tvCoefConf = (TextView)findViewById(fr.gsbcr.android.R.id.cp);
 		tvPraFullName.setText(cr.getPraticien().getPraNom()+" "+cr.getPraticien().getPraPrenom());
 		tvBilan.setText(cr.getsBilanCR());
 		tvMotif.setText(cr.getsMotifCR().getLabelMotif());
-		SimpleDateFormat df = new SimpleDateFormat("dd-mm-yyy");
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		tvDateVisite.setText(df.format(cr.getdDateVisite()));
 		tvRapDate.setText(df.format(cr.getdDateCR()));
 		tvRapNum.setText(Integer.toString(cr.getiNumCR()));

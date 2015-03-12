@@ -37,7 +37,7 @@ class RequestTask extends AsyncTask<String,String, String>{
     	HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
     	httpclient = new DefaultHttpClient(httpParameters);
     	
-        String responseString = null;
+        String responseString = "NONE";
         try {
         	 Log.i("Connection","Connection Successful");
         	
@@ -52,16 +52,17 @@ class RequestTask extends AsyncTask<String,String, String>{
             } else{
                 //Closes the connection.
                 response.getEntity().getContent().close();
+                responseString = null;
                 throw new IOException(statusLine.getReasonPhrase());
             }
         	
         	 
         } catch (ClientProtocolException e) {
-            //TODO Handle problems..
+        	responseString = null;
         } catch (IOException e) {
-            //TODO Handle problems..
+        	responseString = null;
         }
-        Log.i("AZE","RESPONSE");
+        Log.i("AZE",responseString);
         
         return responseString;
     }

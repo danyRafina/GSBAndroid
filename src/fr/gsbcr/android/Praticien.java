@@ -195,7 +195,7 @@ public class Praticien  {
 	 */
 	@Override
 	public String toString() {
-		return praNom+" "+praPrenom ;
+		return praNom+" "+praPrenom;
 	}
 
 }

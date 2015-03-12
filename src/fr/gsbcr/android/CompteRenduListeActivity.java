@@ -57,8 +57,9 @@ AsyncInterface {
 		Bundle bundle = getIntent().getExtras();
 		System.out.println(bundle.getInt("Year"));
 		System.out.println(bundle.getInt("Month"));
+		int monthP = bundle.getInt("Month")+1;
 		String post = "http://"+Modele.getAddressAndPort()+"/listCR/" + bundle.getInt("Year")
-				+ "/" + (bundle.getInt("Month") + 1) + "/"
+				+ "/" + monthP + "/"
 				+ Modele.getVisiteur().getsColMatricule() + "/"
 				+ Modele.getVisiteur().getsColMdp();
 		task.execute(post);
@@ -274,7 +275,9 @@ AsyncInterface {
 				Praticien praticien = new Praticien(Integer.parseInt(row
 						.getString("PRA_NUM").toString()), row.getString(
 								"PRA_NOM").toString(), row.getString("PRA_PRENOM")
-								.toString(),row.getString("PRA_ADRESSE"),row.getInt("PRA_CP"),row.getString("PRA_VILLE"),Float.parseFloat(row.getString("PRA_COEFN")),row.getString("PRA_PROF"),row.getString("PRA_LIEU"));
+								.toString(),row.getString("PRA_ADRESSE"),row.getInt("PRA_CP"),
+								row.getString("PRA_VILLE"),Float.parseFloat(row.getString("PRA_COEFN")),
+								row.getString("PRA_PROF"),row.getString("PRA_LIEU"));
 				try {
 					lesCR.add(new CompteRendu(Modele.getVisiteur(), Integer
 							.parseInt(row.getString("NUM").toString()),
