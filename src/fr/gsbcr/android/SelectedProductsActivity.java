@@ -15,8 +15,11 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SelectedProductsActivity extends Activity implements AsyncInterface , OnClickListener{
 	private List<Medicament> medicaments = new ArrayList<Medicament>();
@@ -55,13 +59,19 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 		String post = "http://"+Modele.getAddressAndPort()+"/listMedicament/"
 				+ Modele.getVisiteur().getsColMatricule() + "/"
 				+ Modele.getVisiteur().getsColMdp();
-		task.execute(post);
-		this.preProcess();
+		if(isNetworkAvailable() == true){
+			task.execute(post);
+			this.preProcess();
+		}
+		else {
+			String text = "Oups ! Vous avez désactiver votre WIFI ou votre réseau cellulaire . \n  Veuillez l'activer SVP !";
+			Context context = getApplicationContext();
+			Toast.makeText(context, text,Toast.LENGTH_LONG).show();
+		}
 		Button buttonC = (Button) findViewById(fr.gsbcr.android.R.id.cancel);
 		buttonC.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				System.out.println("Onclick");
 				new AlertDialog.Builder(SelectedProductsActivity.this)
 				.setTitle("Quitter le compte-rendu")
 				.setCancelable(false)
@@ -95,6 +105,13 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 			}
 		});
 	}
+
+	protected boolean isNetworkAvailable(){
+		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -216,7 +233,7 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 						}
 					}
 				}).show();
-		
+
 	}
 
 	public void onBack(){
@@ -249,7 +266,7 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 						}
 					}
 				}).show();
-		
+
 	}
 	protected void onChangeSelectedMed() {
 
@@ -271,17 +288,17 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 	public void processFinish(String output) throws JSONException {
 		prog.dismiss();
 		if(output != null){
-		medicaments.clear();
-		medicamentSelected.clear();
-		JSONArray jsonMedicament = new JSONArray(output);
-		medicamentS = new String[jsonMedicament.length()];
-		for (int i = 0; i < jsonMedicament.length();i++) {
-			JSONObject row = jsonMedicament.getJSONObject(i);
-			Medicament med = new Medicament(row.getString(
-					"DEPOTLEGAL").toString(), row.getString("NOMCOMMERCIAL").toString(),i);
-			medicaments.add(med);
-			medicamentS[i] = row.getString("NOMCOMMERCIAL").toString();
-		}
+			medicaments.clear();
+			medicamentSelected.clear();
+			JSONArray jsonMedicament = new JSONArray(output);
+			medicamentS = new String[jsonMedicament.length()];
+			for (int i = 0; i < jsonMedicament.length();i++) {
+				JSONObject row = jsonMedicament.getJSONObject(i);
+				Medicament med = new Medicament(row.getString(
+						"DEPOTLEGAL").toString(), row.getString("NOMCOMMERCIAL").toString(),i);
+				medicaments.add(med);
+				medicamentS[i] = row.getString("NOMCOMMERCIAL").toString();
+			}
 		}
 		else {
 			new AlertDialog.Builder(SelectedProductsActivity.this)
@@ -328,7 +345,7 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 		}
 
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -341,77 +358,77 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.logout :
-				try {
-					Modele.clear();
-					RequestTask.onCloseConnection();
+			try {
+				Modele.clear();
+				RequestTask.onCloseConnection();
 
-				} catch (IllegalStateException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				new AlertDialog.Builder(SelectedProductsActivity.this)
-				.setTitle("Quitter le compte-rendu")
-				.setCancelable(false)
-				.setMessage(
-						"Voulez-vous vraiment annuler la création du compte-rendu ?")
-						.setNegativeButton("Non",
-								new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// do nothing
-							}
-						})
-						.setPositiveButton("Oui",
-								new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								try {
-									Builder al = new AlertDialog.Builder(SelectedProductsActivity.this);
-									al.setTitle("Déconnexion")
-									.setMessage(
-											"Voulez-vous vraiment vous déconnecter ?")
-											.setNegativeButton("Non",
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			new AlertDialog.Builder(SelectedProductsActivity.this)
+			.setTitle("Quitter le compte-rendu")
+			.setCancelable(false)
+			.setMessage(
+					"Voulez-vous vraiment annuler la création du compte-rendu ?")
+					.setNegativeButton("Non",
+							new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// do nothing
+						}
+					})
+					.setPositiveButton("Oui",
+							new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							try {
+								Builder al = new AlertDialog.Builder(SelectedProductsActivity.this);
+								al.setTitle("Déconnexion")
+								.setMessage(
+										"Voulez-vous vraiment vous déconnecter ?")
+										.setNegativeButton("Non",
+												new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog,
+													int which) {
+
+											}})
+											.setPositiveButton("Oui",
 													new DialogInterface.OnClickListener() {
 												@Override
 												public void onClick(DialogInterface dialog,
 														int which) {
-
-												}})
-												.setPositiveButton("Oui",
-														new DialogInterface.OnClickListener() {
-													@Override
-													public void onClick(DialogInterface dialog,
-															int which) {
-														try {
-															RequestTask.onCloseConnection();
-															Modele.setVisiteur(null);
-														} catch (IllegalStateException
-																| IOException e) {
-															// TODO Auto-generated catch block
-															e.printStackTrace();
-														}
-														finish();
-														Intent intent = new Intent(
-																getApplicationContext(),
-																LoginActivity.class);
-														intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-													
-														startActivity(intent);
-
+													try {
+														RequestTask.onCloseConnection();
+														Modele.setVisiteur(null);
+													} catch (IllegalStateException
+															| IOException e) {
+														// TODO Auto-generated catch block
+														e.printStackTrace();
 													}
-												}).setIcon(android.R.drawable.ic_dialog_alert)
-												.show();
+													finish();
+													Intent intent = new Intent(
+															getApplicationContext(),
+															LoginActivity.class);
+													intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-								} catch (IllegalStateException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+													startActivity(intent);
+
+												}
+											}).setIcon(android.R.drawable.ic_dialog_alert)
+											.show();
+
+							} catch (IllegalStateException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
-						}).show();
+						}
+					}).show();
 
-			
+
 			break;
 		case android.R.id.home:
 			onBack();
@@ -620,7 +637,7 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 		onChangeSelectedMed();
 
 	}
-	
+
 	public void onShowDialog(final Class<?> class1){
 		new AlertDialog.Builder(SelectedProductsActivity.this)
 		.setTitle("Quitter le compte-rendu")
@@ -651,10 +668,10 @@ public class SelectedProductsActivity extends Activity implements AsyncInterface
 		prog.setTitle("Chargement de la liste des produits . Veuillez patienter !");
 		prog.setCancelable(false);
 		prog.show();
-		
+
 	}
 
-	
+
 
 
 }

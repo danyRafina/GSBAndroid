@@ -19,6 +19,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -70,13 +72,20 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 		if (task != null) {
 			RequestTask.toGetStatus(task);
 		}
-		task = new RequestTask();
-		task.delegation = this;
-		String post = "http://"+Modele.getAddressAndPort()+"/listsForCR/"
-				+ Modele.getVisiteur().getsColMatricule() + "/"
-				+ Modele.getVisiteur().getsColMdp();
-		this.preProcess();
-		task.execute(post);
+		if(isNetworkAvailable() == true) {
+			task = new RequestTask();
+			task.delegation = this;
+			String post = "http://"+Modele.getAddressAndPort()+"/listsForCR/"
+					+ Modele.getVisiteur().getsColMatricule() + "/"
+					+ Modele.getVisiteur().getsColMdp();
+			this.preProcess();
+			task.execute(post);
+		}
+		else {
+			String text = "Oups ! Vous avez désactiver votre WIFI ou votre réseau cellulaire . \n  Veuillez l'activer SVP !";
+			Context context = getApplicationContext();
+			Toast.makeText(context, text,Toast.LENGTH_LONG).show();
+		}
 
 		Button buttonC = (Button) findViewById(fr.gsbcr.android.R.id.cancel);
 		buttonC.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +94,12 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 				onBack();
 			}
 		});
+	}
+
+	protected boolean isNetworkAvailable(){
+		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 
 	@Override
@@ -215,7 +230,7 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 															getApplicationContext(),
 															LoginActivity.class);
 													intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-												
+
 													startActivity(intent);
 
 												}
@@ -229,8 +244,8 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 						}
 					}).show();
 
-		
-		break;
+
+			break;
 		case android.R.id.home:
 			onBack();
 			break;
@@ -424,7 +439,6 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 			JSONArray jsonPraticiens = new JSONArray(json.getString("PRA_LIST"));
 			JSONArray jsonMotifs = new JSONArray(json.getString("MOTIF_LIST"));
 			this.nextNum = Integer.parseInt(json.getString("COUNT_RAP"));
-			System.out.println(this.nextNum);
 			for (int i = 0; i < jsonPraticiens.length(); i++) {
 				JSONObject row = jsonPraticiens.getJSONObject(i);
 				Praticien praticien = new Praticien(Integer.parseInt(row.getString(
@@ -493,7 +507,6 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 		}
 		else {
 			CompteRendu compteRendu = new CompteRendu(Modele.getVisiteur(),this.nextNum, praticien,new Date(), DateFormatter.convertStringToDate(tvDate.getText().toString()),bilan.getText().toString(),motif,Integer.parseInt(coefConf.getText().toString()),"0");
-			System.out.println(compteRendu);
 			Intent intent = new Intent(NouvCompteRenduActivity.this,SelectedProductsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			Modele.setCr(compteRendu);
 			startActivity(intent);
@@ -532,7 +545,7 @@ public class NouvCompteRenduActivity extends Activity implements AsyncInterface 
 		prog.setTitle("Chargement des listes . Veuillez patienter !");
 		prog.setCancelable(false);
 		prog.show();
-		
+
 	}
 
 

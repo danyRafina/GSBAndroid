@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -70,7 +72,6 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 			TableRow row= new TableRow(this);
 			TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
 			row.setLayoutParams(lp);
-			System.out.println(Modele.getMedicaments().get(i).getIdentifier());
 			row.setGravity(Gravity.CENTER);
 			np = new NumberPicker(EchantillonsActivity.this);
 			np.setId(i);
@@ -96,10 +97,6 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 							off.get(i).setEchantillon(newVal);
 						}
 					}
-
-
-
-					System.out.println(picker.getId()+" FOR "+med+":");
 				}
 			});
 			layout.addView(row);
@@ -192,52 +189,66 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 					@Override
 					public void onClick(DialogInterface dialog,
 							int which) {
-						sendTask = new SendTask();
-						sendTask.delegation = EchantillonsActivity.this;
-						String url = "http://"+Modele.getAddressAndPort()+"/insertCR/"+Modele.getVisiteur().getsColMatricule()+"/"+Modele.getVisiteur().getsColMdp();
-						JSONObject json = new JSONObject();
-						JSONArray jsonA = new JSONArray();
-						JSONObject json3 = new JSONObject();
-						try {
-							String DATE_FORMAT_NOW = "yyyy-MM-d";
 
-							SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
-							String stringDate = sdf.format(Modele.getCr().getdDateVisite());
-							json.put("rapNum", Modele.getCr().getiNumCR());
-							json.put("praNum", Modele.getCr().getPraticien().getPraNum());
-							json.put("coefConf", Modele.getCr().getiCoefConfCR());
-							json.put("rapBilan", Modele.getCr().getsBilanCR());
-							json.put("motif", Modele.getCr().getsMotifCR().getNumMotif());
-							json.put("dateVisite",stringDate);
-							json.put("rapLu",Modele.getCr().getByEstLuCR());
-							Log.d("JSON CR",json.toString());
+						if(isNetworkAvailable() == true) {
+							sendTask = new SendTask();
+							sendTask.delegation = EchantillonsActivity.this;
+							String url = "http://"+Modele.getAddressAndPort()+"/insertCR/"+Modele.getVisiteur().getsColMatricule()+"/"+Modele.getVisiteur().getsColMdp();
+							JSONObject json = new JSONObject();
+							JSONArray jsonA = new JSONArray();
+							JSONObject json3 = new JSONObject();
+							try {
+								String DATE_FORMAT_NOW = "yyyy-MM-d";
+
+								SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+								String stringDate = sdf.format(Modele.getCr().getdDateVisite());
+								json.put("rapNum", Modele.getCr().getiNumCR());
+								json.put("praNum", Modele.getCr().getPraticien().getPraNum());
+								json.put("coefConf", Modele.getCr().getiCoefConfCR());
+								json.put("rapBilan", Modele.getCr().getsBilanCR());
+								json.put("motif", Modele.getCr().getsMotifCR().getNumMotif());
+								json.put("dateVisite",stringDate);
+								json.put("rapLu",Modele.getCr().getByEstLuCR());
+								Log.d("JSON CR",json.toString());
 
 
-							for(Offrir oneOff : off){
-								JSONObject json2 = new JSONObject();
-								json2.put("matricule",oneOff.getColMatricule().getsColMatricule());
-								json2.put("medicament",oneOff.getMed().getDepotLegal());
-								json2.put("rapNum", oneOff.getCr().getiNumCR());
-								json2.put("quantite",oneOff.getEchantillon());
-								jsonA.put(json2);
+								for(Offrir oneOff : off){
+									JSONObject json2 = new JSONObject();
+									json2.put("matricule",oneOff.getColMatricule().getsColMatricule());
+									json2.put("medicament",oneOff.getMed().getDepotLegal());
+									json2.put("rapNum", oneOff.getCr().getiNumCR());
+									json2.put("quantite",oneOff.getEchantillon());
+									jsonA.put(json2);
 
+
+								}
+								json3.put("Echantillon", jsonA);
+								JSONObject j = new JSONObject();
+								j.put("url",url);
+								prog = new ProgressDialog(EchantillonsActivity.this);
+								prog.setTitle("Envoi en cours . Veuillez patienter !");
+								prog.setCancelable(false);
+								prog.show();
+								sendTask.execute(j,json,json3);
 
 							}
-							json3.put("Echantillon", jsonA);
-							JSONObject j = new JSONObject();
-							j.put("url",url);
-							prog = new ProgressDialog(EchantillonsActivity.this);
-							prog.setTitle("Envoi en cours . Veuillez patienter !");
-							prog.setCancelable(false);
-							prog.show();
-							sendTask.execute(j,json,json3);
-
+							catch(JSONException je){
+								je.printStackTrace();
+							}
 						}
-						catch(JSONException je){
-							je.printStackTrace();
+						else {
+							String text = "Oups ! Vous avez désactiver votre WIFI ou votre réseau cellulaire . \n  Veuillez l'activer SVP !";
+							Context context = getApplicationContext();
+							Toast.makeText(context, text,Toast.LENGTH_LONG).show();
 						}
 					}
 				}).show();
+	}
+
+	protected boolean isNetworkAvailable(){
+		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	public void onBack(){
 		new AlertDialog.Builder(EchantillonsActivity.this)
@@ -522,11 +533,6 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 	public void processFinish(String output) throws JSONException {
 		prog.dismiss();
 		if(output != null){
-			try{
-				System.out.println("RESPONSE : "+output);}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
 			JSONArray json = new JSONArray(output);
 			JSONObject jsonO = json.getJSONObject(0);
 			if(jsonO.getString("RESULT").equals("SUCCESS")){
@@ -593,7 +599,7 @@ public class EchantillonsActivity extends Activity implements AsyncInterface{
 			}
 		}
 		else {
-			Toast.makeText(getApplicationContext(), "Vérifiez votre connexion", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Oups ! Une erreur est survenue avec votre connexion !", Toast.LENGTH_LONG).show();
 		}
 	}
 	public void onShowDialog(final Class<?> class1){

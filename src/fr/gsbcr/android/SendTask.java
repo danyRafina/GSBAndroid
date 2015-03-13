@@ -33,7 +33,6 @@ class SendTask extends AsyncTask<JSONObject,JSONArray,String>{
 
 	@Override
 	protected String doInBackground(JSONObject... uri) {
-		Log.i("AZE","NEW REQUEST");
 		httpclient = new DefaultHttpClient();
 		String responseString = null;
 		HttpPost post = null;
@@ -43,7 +42,6 @@ class SendTask extends AsyncTask<JSONObject,JSONArray,String>{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		//post = new HttpPost("http://192.168.1.200:8080/connection/a131/azerty");
 		try {
 			Log.d("url",uri[0].getString("url").toString());
 		} catch (JSONException e1) {
@@ -51,10 +49,8 @@ class SendTask extends AsyncTask<JSONObject,JSONArray,String>{
 			e1.printStackTrace();
 		}
 		try {
-			Log.i("Connection","Connection Successful");
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("CR",uri[1].toString()));
-			//Log.d("CR",uri[1].toString());
 			nameValuePairs.add(new BasicNameValuePair("Echantillons", uri[2].toString()));
 			Log.d("Ech",uri[2].toString());
 			Log.d("CR", uri[1].toString());
@@ -79,29 +75,21 @@ class SendTask extends AsyncTask<JSONObject,JSONArray,String>{
 		} catch (IOException e) {
 			//TODO Handle problems..
 		}
-	try{
-		Log.i("AZE",responseString);
-	}
-	catch(Exception e){
-		e.printStackTrace();
-}
-	
-
 		return responseString;
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-			try {
-				
-				delegation.processFinish(result);
-				
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
+		try {
+
+			delegation.processFinish(result);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
 		}
+	}
 
 	protected static void onCloseConnection() throws IllegalStateException, IOException{
 		//response.getEntity().getContent().close();

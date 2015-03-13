@@ -245,7 +245,7 @@
         <LinearLayout
             android:id="@+id/LinearLayout09"
             android:layout_width="wrap_content"
-            android:layout_height="71dp"
+            android:layout_height="124dp"
             android:layout_marginRight="5dp"
             android:orientation="horizontal" >
 
@@ -263,12 +263,12 @@
             <TextView
                 android:id="@+id/local"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tb8"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="27dp"
                 android:layout_marginLeft="9dp"
                 android:ems="10"
                 android:textSize="21sp" />
+
         </LinearLayout>
     </LinearLayout>
 

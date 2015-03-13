@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,88 +8,52 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/Azure"
-        android:gravity="center|center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:layout_marginLeft="5sp"
-            android:layout_marginRight="5sp"
-            android:layout_marginTop="20sp"
-            android:text="@string/start_connection"
-            android:textSize="23sp" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/logo" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView1"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/linearLayout2" >
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="66dp"
-            android:gravity="center" >
+            android:background="@color/Azure"
+            android:gravity="center|center_horizontal"
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/reset"
-                android:layout_width="101dp"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/border"
-                android:onClick="onReset"
-                android:text="@string/reset"
-                android:textSize="19sp"
-                android:textStyle="bold|italic" />
+                android:layout_marginBottom="20sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginTop="20sp"
+                android:text="@string/start_connection"
+                android:textSize="23sp" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/bValidate"
-                android:layout_width="98dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/reset"
-                android:background="@drawable/border"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:onClick="onValidate"
-                android:text="@string/validate"
-                android:textSize="19sp"
-                android:textStyle="bold|italic"
-                android:visibility="visible" />
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-        </RelativeLayout>
+            <QuickContactBadge
+                android:id="@+id/quickContactBadge1"
+                android:layout_width="138dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_action_user" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="56dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical" >
 
             <EditText
@@ -104,26 +68,20 @@
                 android:textColor="@color/Black"
                 android:textSize="18sp"
                 android:textStyle="italic"
-                android:typeface="normal" >
-
-                <requestFocus />
-            </EditText>
+                android:typeface="normal" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/linearLayout1"
-            android:layout_marginTop="41dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical" >
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="273dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="18dp"
                 android:ems="10"
                 android:hint="@string/passwd"
                 android:inputType="textPassword"
@@ -132,6 +90,48 @@
                 android:typeface="normal" />
         </LinearLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" >
 
-</RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="66dp"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/reset"
+                    android:layout_width="101dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/border"
+                    android:onClick="onReset"
+                    android:text="@string/reset"
+                    android:textSize="19sp"
+                    android:textStyle="bold|italic" />
+
+                <Button
+                    android:id="@+id/bValidate"
+                    android:layout_width="98dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/reset"
+                    android:background="@drawable/border"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:onClick="onValidate"
+                    android:text="@string/validate"
+                    android:textSize="19sp"
+                    android:textStyle="bold|italic"
+                    android:visibility="visible" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

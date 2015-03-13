@@ -27,80 +27,78 @@ class RequestTask extends AsyncTask<String,String, String>{
 	public AsyncInterface delegation ;
 	private static HttpClient httpclient;
 	private static HttpResponse response ;
-	private static ProgressDialog p;
 
 	@Override
 	protected String doInBackground(String... uri) {
-    	Log.i("AZE","NEW REQUEST");
-    	HttpParams httpParameters = new BasicHttpParams();
-    	int timeoutConnection = 20;
-    	HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-    	httpclient = new DefaultHttpClient(httpParameters);
-    	
-        String responseString = "NONE";
-        try {
-        	 Log.i("Connection","Connection Successful");
-        	
-            response = httpclient.execute(new HttpGet(uri[0]));
-            StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                responseString = out.toString();
-                out.close();
-              
-            } else{
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                responseString = null;
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-        	
-        	 
-        } catch (ClientProtocolException e) {
-        	responseString = null;
-        } catch (IOException e) {
-        	responseString = null;
-        }
-        Log.i("AZE",responseString);
-        
-        return responseString;
-    }
+		HttpParams httpParameters = new BasicHttpParams();
+		int timeoutConnection = 20;
+		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		httpclient = new DefaultHttpClient(httpParameters);
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        try {
+		String responseString = "NONE";
+		try {
+			Log.i("Connection","Connection Successful");
+
+			response = httpclient.execute(new HttpGet(uri[0]));
+			StatusLine statusLine = response.getStatusLine();
+			if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				response.getEntity().writeTo(out);
+				responseString = out.toString();
+				out.close();
+
+			} else{
+				//Closes the connection.
+				response.getEntity().getContent().close();
+				responseString = null;
+				throw new IOException(statusLine.getReasonPhrase());
+			}
+
+
+		} catch (ClientProtocolException e) {
+			responseString = null;
+		} catch (IOException e) {
+			responseString = null;
+		}
+		return responseString;
+	}
+
+	@Override
+	protected void onPostExecute(String result) {
+		super.onPostExecute(result);
+		try {
 			this.delegation.processFinish(result);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       
 
-		
-    }
 
-    protected static void onCloseConnection() throws IllegalStateException, IOException{
-    	//response.getEntity().getContent().close();
-    	/*if(response != null ){
+
+	}
+	
+	
+
+	protected static void onCloseConnection() throws IllegalStateException, IOException{
+		//response.getEntity().getContent().close();
+		/*if(response != null ){
     		response.getEntity().getContent().close();
 	    	httpclient.getConnectionManager().shutdown();
 	    	response = null;
 	    	httpclient = null;
     	}*/
-    }
-    
-    protected static int toGetStatus(RequestTask task){
-    	int statusCode = 0;
-    	if(task.getStatus() == AsyncTask.Status.RUNNING ) {
+	}
+
+	protected static int toGetStatus(RequestTask task){
+		int statusCode = 0;
+		if(task.getStatus() == AsyncTask.Status.RUNNING ) {
 			task.cancel(true);
 		}
-    	else if (task.getStatus() == AsyncTask.Status.FINISHED) {
-    		statusCode = 1;
-    		
-    	}
-    	return statusCode ;
-    }
+		else if (task.getStatus() == AsyncTask.Status.FINISHED) {
+			statusCode = 1;
+
+		}
+		return statusCode ;
+	}
 
 }

@@ -58,12 +58,12 @@ public class CompteRenduDetailsActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
+
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch(item.getItemId()){
@@ -99,50 +99,50 @@ public class CompteRenduDetailsActivity extends Activity {
 										getApplicationContext(),
 										LoginActivity.class);
 								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							
+
 								startActivity(intent);
 
 							}
 						}).setIcon(android.R.drawable.ic_dialog_alert)
 						.show();
-			
+
 			break;
 		case android.R.id.home:
 			this.finish();
-		break;
+			break;
 		case R.id.tableME :
 			startActivity(new Intent(CompteRenduDetailsActivity.this,
 					AboutActivity.class));
 			break;
 		case R.id.quit :
 			new AlertDialog.Builder(this)
-		    .setTitle("Quitter l'application")
-		    .setMessage("Voulez-vous vraiment quitter cette application ?")
-		    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-		        @Override
+			.setTitle("Quitter l'application")
+			.setMessage("Voulez-vous vraiment quitter cette application ?")
+			.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(DialogInterface dialog, int which) { 
-		            // do nothing
-		        }
-		     })
-		     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-		        @Override
+					// do nothing
+				}
+			})
+			.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(DialogInterface dialog, int which) {
-		        	try {
+					try {
 						Modele.setVisiteur(null);
 						RequestTask.onCloseConnection();
 					} catch (IllegalStateException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-		        	Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-		        	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		        	intent.putExtra("EXIT", true);
-		        	startActivity(intent);
-		        }
-		     })
-		    .setIcon(android.R.drawable.ic_dialog_alert)
-		     .show();
-			
+					Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("EXIT", true);
+					startActivity(intent);
+				}
+			})
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.show();
+
 			break;
 		case R.id.list_cr : 
 			final Calendar c = Calendar.getInstance();
@@ -156,15 +156,15 @@ public class CompteRenduDetailsActivity extends Activity {
 				@Override
 				public void onDateSet(DatePicker view, int year,
 						int monthOfYear, int dayOfMonth) {	
-				
-						Intent intent = new Intent(CompteRenduDetailsActivity.this,CompteRenduListeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-						intent.putExtra("Year",(int)year);
-						intent.putExtra("Month",monthOfYear);
-						startActivity(intent);
-					}
 
-				
-				
+					Intent intent = new Intent(CompteRenduDetailsActivity.this,CompteRenduListeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					intent.putExtra("Year",(int)year);
+					intent.putExtra("Month",monthOfYear);
+					startActivity(intent);
+				}
+
+
+
 			}, mYear, mMonth, mDay);
 			java.lang.reflect.Field[] datePickerDialogFields = dpd.getClass()
 					.getDeclaredFields();
@@ -204,18 +204,18 @@ public class CompteRenduDetailsActivity extends Activity {
 			dpd.setButton(
 					DatePickerDialog.BUTTON_POSITIVE, "Valider",dpd);
 			dpd.show();
-		break;
+			break;
 
-          
+
 		}
 		return super.onOptionsItemSelected(item);
 	};
-	
+
 	public void getDetailsPra(View view){
 		Intent intent = new Intent(CompteRenduDetailsActivity.this,PraticienActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		startActivity(intent);
 	}
 
 
-	
+
 }

@@ -20,6 +20,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -62,8 +64,15 @@ AsyncInterface {
 				+ "/" + monthP + "/"
 				+ Modele.getVisiteur().getsColMatricule() + "/"
 				+ Modele.getVisiteur().getsColMdp();
-		task.execute(post);
-		this.preProcess();
+		if(isNetworkAvailable() == true){
+			task.execute(post);
+			this.preProcess();
+		}
+		else {
+			String text = "Oups ! Vous avez désactiver votre WIFI ou votre réseau cellulaire . \n  Veuillez l'activer SVP !";
+			Context context = getApplicationContext();
+			Toast.makeText(context, text,Toast.LENGTH_LONG).show();
+		}
 
 		this.adapter = new NewAdapter(this, lesCR);
 		lvCR = (ListView) findViewById(fr.gsbcr.android.R.id.listCompteRendu);
@@ -95,7 +104,7 @@ AsyncInterface {
 			@Override
 			public void onClick(DialogInterface dialog,
 					int which) {
-			finish();
+				finish();
 				startActivity(new Intent(CompteRenduListeActivity.this,DashboardActivity.class));
 			}
 		}).setIcon(android.R.drawable.ic_dialog_alert)
@@ -107,6 +116,12 @@ AsyncInterface {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
+	}
+
+	protected boolean isNetworkAvailable(){
+		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 
 	@Override
@@ -144,7 +159,7 @@ AsyncInterface {
 										getApplicationContext(),
 										LoginActivity.class);
 								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							
+
 								startActivity(intent);
 
 							}
@@ -208,15 +223,15 @@ AsyncInterface {
 				@Override
 				public void onDateSet(DatePicker view, int year,
 						int monthOfYear, int dayOfMonth) {	
-				
-						Intent intent = new Intent(CompteRenduListeActivity.this,CompteRenduListeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-						intent.putExtra("Year",(int)year);
-						intent.putExtra("Month",monthOfYear);
-						startActivity(intent);
-					}
 
-				
-				
+					Intent intent = new Intent(CompteRenduListeActivity.this,CompteRenduListeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					intent.putExtra("Year",(int)year);
+					intent.putExtra("Month",monthOfYear);
+					startActivity(intent);
+				}
+
+
+
 			}, mYear, mMonth, mDay);
 			java.lang.reflect.Field[] datePickerDialogFields = dpd.getClass()
 					.getDeclaredFields();
@@ -257,7 +272,7 @@ AsyncInterface {
 					DatePickerDialog.BUTTON_POSITIVE, "Valider",dpd);
 			dpd.show();
 			break;
-			
+
 
 		}
 		return super.onOptionsItemSelected(item);
@@ -268,40 +283,40 @@ AsyncInterface {
 		lesCR.clear();
 		prog.dismiss();
 		if(output != null){
-		JSONArray json = new JSONArray(output);
-		if (!json.getJSONObject(0).has("RESULT")) {
-			for (int i = 0; i < json.length(); i++) {
-				JSONObject row = json.getJSONObject(i);
-				Praticien praticien = new Praticien(Integer.parseInt(row
-						.getString("PRA_NUM").toString()), row.getString(
-								"PRA_NOM").toString(), row.getString("PRA_PRENOM")
-								.toString(),row.getString("PRA_ADRESSE"),row.getInt("PRA_CP"),
-								row.getString("PRA_VILLE"),Float.parseFloat(row.getString("PRA_COEFN")),
-								row.getString("PRA_PROF"),row.getString("PRA_LIEU"));
-				try {
-					lesCR.add(new CompteRendu(Modele.getVisiteur(), Integer
-							.parseInt(row.getString("NUM").toString()),
-							praticien, DateFormatter.convertStringToDate(row
-									.getString("RAP_DATE").toString()),
-									DateFormatter.convertStringToDate(row.getString(
-											"DATE_VISITE").toString()), row
-											.getString("BILAN"), new Motif(row.getInt("NUMMOTIF"),row.getString(
-													"LABELMOTIF").toString()), Integer
-													.parseInt(row.getString("COEFCONF")
-															.toString()), row
-															.getString("RAPLU").toString()));
-					if(this.adapter != null){
-						this.adapter.notifyDataSetChanged();
+			JSONArray json = new JSONArray(output);
+			if (!json.getJSONObject(0).has("RESULT")) {
+				for (int i = 0; i < json.length(); i++) {
+					JSONObject row = json.getJSONObject(i);
+					Praticien praticien = new Praticien(Integer.parseInt(row
+							.getString("PRA_NUM").toString()), row.getString(
+									"PRA_NOM").toString(), row.getString("PRA_PRENOM")
+									.toString(),row.getString("PRA_ADRESSE"),row.getInt("PRA_CP"),
+									row.getString("PRA_VILLE"),Float.parseFloat(row.getString("PRA_COEFN")),
+									row.getString("PRA_PROF"),row.getString("PRA_LIEU"));
+					try {
+						lesCR.add(new CompteRendu(Modele.getVisiteur(), Integer
+								.parseInt(row.getString("NUM").toString()),
+								praticien, DateFormatter.convertStringToDate(row
+										.getString("RAP_DATE").toString()),
+										DateFormatter.convertStringToDate(row.getString(
+												"DATE_VISITE").toString()), row
+												.getString("BILAN"), new Motif(row.getInt("NUMMOTIF"),row.getString(
+														"LABELMOTIF").toString()), Integer
+														.parseInt(row.getString("COEFCONF")
+																.toString()), row
+																.getString("RAPLU").toString()));
+						if(this.adapter != null){
+							this.adapter.notifyDataSetChanged();
+						}
+					} catch (NumberFormatException | ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (NumberFormatException | ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
-		}
-		else {
-			this.onDialogShow("Il n'y a pas de compte-rendu à cette date ");
-		}
+			else {
+				this.onDialogShow("Il n'y a pas de compte-rendu à cette date ");
+			}
 		}
 		else {
 			this.onDialogShow("Oups ! Vérifiez votre connexion internet !");
